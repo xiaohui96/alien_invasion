@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+# encoding: utf-8
+"""
+@author: xiaohui
+@contact: xiaohui1295371450@163.com
+@file: game_functions.py
+@time: 2019-02-24 17:41
+@desc:
+"""
+
+import sys
+
+import pygame
+
+
+def check_events(ship):
+    # 响应键盘和鼠标事件
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                ship.moving_right = True
+
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                ship.moving_right = False
+
+
+def update_sceen(ai_settings, screen, ship):
+    """更新屏幕上的图像，并切换到新屏幕"""
+    # 每次循环都重绘屏幕
+    screen.fill(ai_settings.bg_color)
+    ship.blitme()
+
+    # 让最近绘制的屏幕可见
+    pygame.display.flip()
